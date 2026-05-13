@@ -69,9 +69,10 @@ const GeneratorControls = ({
         setClasses(clsRes.data.classes);
         setYears(yearRes.data.years);
 
-        const current = Array.isArray(yearRes.data)
-          ? yearRes.data.find((y: academicYear) => y.isCurrent)
-          : yearRes.data;
+        const rawYears = yearRes.data?.years ?? yearRes.data;
+        const current = Array.isArray(rawYears)
+          ? rawYears.find((y: academicYear) => y.isCurrent)
+          : rawYears;
 
         if (current?._id) setSelectedYear(current._id);
       } catch (error) {
