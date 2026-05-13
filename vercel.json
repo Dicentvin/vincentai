@@ -18,15 +18,7 @@
   ],
   "functions": {
     "api/**/*.js": {
-      "memory": 512,
-      "maxDuration": 30
-    },
-    "api/documents/upload.js": {
       "memory": 1024,
-      "maxDuration": 60
-    },
-    "api/ai/*.js": {
-      "memory": 512,
       "maxDuration": 60
     }
   }
