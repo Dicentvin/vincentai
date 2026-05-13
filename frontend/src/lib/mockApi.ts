@@ -79,17 +79,15 @@ export const mockApi = {
       };
     }
     if (url.includes("/exams") && !url.match(/\/exams\/[^/]+/)) {
-      return {
-        data: {
-          exams: mockExams,
-          pagination: { total: mockExams.length, page: 1, pages: 1, limit: 10 },
-        },
-      };
+      return { data: mockExams };
+    }
+    if (url.match(/\/exams\/[^/]+\/result/)) {
+      return { data: null };
     }
     if (url.match(/\/exams\/[^/]+/)) {
-      const id = url.split("/exams/")[1];
+      const id = url.split("/exams/")[1].split("/")[0];
       const exam = mockExams.find((e) => e._id === id) ?? mockExams[0];
-      return { data: { exam } };
+      return { data: exam };
     }
     if (url.includes("/dashboard/stats")) {
       return { data: mockDashboardStats };
@@ -104,7 +102,16 @@ export const mockApi = {
   post: async (url: string, body?: unknown) => {
     await delay();
     console.log("Mock POST", url, body);
+    if (url.includes("/submit")) {
+      return { data: { success: true, score: 0 } };
+    }
     return { data: { success: true } };
+  },
+
+  patch: async (url: string, body?: unknown) => {
+    await delay();
+    console.log("Mock PATCH", url, body);
+    return { data: { success: true, message: "Status updated" } };
   },
 
   put: async (url: string, body?: unknown) => {

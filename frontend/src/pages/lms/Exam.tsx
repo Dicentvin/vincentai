@@ -42,7 +42,7 @@ const Exam = () => {
     setLoading(true);
     try {
       const res = await api.get(`/exams/${id}`);
-      setExam(res.data);
+      setExam((res.data as any).exam ?? res.data);
     } catch {
       toast.error("Failed to load exam");
       navigate("/lms/exams");
@@ -120,7 +120,7 @@ const Exam = () => {
         answer: ans,
       }));
       const { data } = await api.post(`/exams/${id}/submit`, { answers: payload });
-      toast.success(`Exam submitted! Score: ${data.score}`);
+      toast.success(`Exam submitted! Score: ${(data as any).score ?? 0}`);
       navigate("/lms/exams");
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Submission failed");

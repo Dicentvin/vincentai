@@ -5,7 +5,7 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { academicYear } from "@/types";
 import { api } from "@/lib/api";
-import AcademicYearTable from "@/components/academic-year/academic-year-table";
+import AcademicYearTable from "@/components/academic-year/Academic-year-table";
 import Search from "@/components/global/Search";
 import AcademicYearForm from "@/components/academic-year/AcademicYearForm";
 import CustomAlert from "@/components/global/CustomAlert";
@@ -32,10 +32,10 @@ const AcademicYear = () => {
       if (debouncedSearch) params.append("search", debouncedSearch);
 
       const { data } = await api.get(`/academic-years?${params.toString()}`);
-
-      if (data.years) {
-        setYears(data.years);
-        setTotalPages(data.pagination.pages);
+      const d = data as any;
+      if (d.years) {
+        setYears(d.years);
+        setTotalPages(d.pagination.pages);
       } else {
         setYears([]);
       }
