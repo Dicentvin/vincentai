@@ -42,7 +42,7 @@ const Exam = () => {
     setLoading(true);
     try {
       const res = await api.get(`/exams/${id}`);
-      setExam(res.data);
+      setExam(res.data as exam);
     } catch {
       toast.error("Failed to load exam");
       navigate("/lms/exams");
@@ -120,7 +120,8 @@ const Exam = () => {
         answer: ans,
       }));
       const { data } = await api.post(`/exams/${id}/submit`, { answers: payload });
-      toast.success(`Exam submitted! Score: ${data.score}`);
+      const submitResult = data as { success: boolean; score: number };
+      toast.success(`Exam submitted! Score: ${submitResult.score}`);
       navigate("/lms/exams");
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Submission failed");
@@ -132,7 +133,8 @@ const Exam = () => {
   const handleToggleStatus = async () => {
     try {
       const { data } = await api.patch(`/exams/${id}/status`);
-      toast.success(data.message);
+      const patchResult = data as { success: boolean; message: string };
+      toast.success(patchResult.message);
       fetchExam();
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Failed to update status");

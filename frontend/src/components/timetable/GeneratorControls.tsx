@@ -66,10 +66,10 @@ const GeneratorControls = ({
           api.get("/classes"),
           api.get("/academic-years"),
         ]);
-        setClasses(clsRes.data.classes);
-        setYears(yearRes.data.years);
+        setClasses((clsRes.data as { classes: Class[] }).classes);
+        setYears((yearRes.data as { years: academicYear[] }).years);
 
-        const rawYears = yearRes.data?.years ?? yearRes.data;
+        const rawYears = (yearRes.data as { years: academicYear[] }).years ?? yearRes.data;
         const current = Array.isArray(rawYears)
           ? rawYears.find((y: academicYear) => y.isCurrent)
           : rawYears;
