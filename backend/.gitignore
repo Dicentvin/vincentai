@@ -1,0 +1,63 @@
+# ============================================================
+# EduNexus — .gitignore
+# ============================================================
+
+# ── Dependencies ─────────────────────────────────────────────
+node_modules/
+frontend/node_modules/
+
+# ── Environment variables — NEVER commit these ───────────────
+.env
+.env.local
+.env.development
+.env.production
+.env.development.local
+.env.test.local
+.env.production.local
+frontend/.env
+frontend/.env.local
+frontend/.env.development
+frontend/.env.production
+
+# ── Vercel ───────────────────────────────────────────────────
+.vercel
+
+# ── Frontend build output ────────────────────────────────────
+frontend/dist/
+frontend/dist-ssr/
+frontend/build/
+
+# ── Logs ─────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── OS files ─────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+desktop.ini
+
+# ── Editor / IDE ─────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── Temp / uploads ───────────────────────────────────────────
+/tmp/
+uploads/
+*.tmp
+
+# ── TypeScript build info ────────────────────────────────────
+*.tsbuildinfo
+frontend/tsconfig.tsbuildinfo

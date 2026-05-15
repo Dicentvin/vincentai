@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 // src/pages/dashboards/TeacherDashboard.tsx
 // Classes section: click → /classes/SS1 which shows filtered materials for that class
+=======
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "@/hooks/AuthProvider";
@@ -8,7 +11,11 @@ import {
   Upload, FileText, Clock, CheckCircle2, XCircle,
   Users, Zap, BookOpen, ArrowRight, GraduationCap,
   FlaskConical, Atom, Dna, Sigma, Loader2, BookMarked,
+<<<<<<< HEAD
   Eye,
+=======
+  TrendingUp, Eye,
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -22,9 +29,15 @@ const SUBJECTS = [
 ];
 
 const CLASSES = [
+<<<<<<< HEAD
   { name: "SS1",  color: "from-indigo-600 to-indigo-400" },
   { name: "SS2",  color: "from-[#3ecf8e] to-[#059669]",  textBlack: true },
   { name: "SS3",  color: "from-purple-600 to-purple-400" },
+=======
+  { name: "SS1", color: "from-indigo-600 to-indigo-400" },
+  { name: "SS2", color: "from-[#3ecf8e] to-[#059669]",  textBlack: true },
+  { name: "SS3", color: "from-purple-600 to-purple-400" },
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
   { name: "WAEC", color: "from-amber-500 to-amber-400"  },
   { name: "JAMB", color: "from-red-600 to-red-400"      },
 ];
@@ -34,11 +47,15 @@ export default function TeacherDashboard() {
   const navigate  = useNavigate();
   const [pending,   setPending]   = useState<LmsDocument[]>([]);
   const [myMats,    setMyMats]    = useState<LmsDocument[]>([]);
+<<<<<<< HEAD
   const [classCounts, setClassCounts] = useState<Record<string, number>>({});
+=======
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
   const [loading,   setLoading]   = useState(true);
   const [approving, setApproving] = useState<string | null>(null);
 
   useEffect(() => {
+<<<<<<< HEAD
     Promise.all([lmsDocs.listPending(), lmsDocs.list(), lmsDocs.listShared()])
       .then(([pRes, mRes, sRes]) => {
         setPending(pRes.documents ?? []);
@@ -49,6 +66,12 @@ export default function TeacherDashboard() {
           if (d.className) counts[d.className] = (counts[d.className] || 0) + 1;
         });
         setClassCounts(counts);
+=======
+    Promise.all([lmsDocs.listPending(), lmsDocs.list()])
+      .then(([pRes, mRes]) => {
+        setPending(pRes.documents ?? []);
+        setMyMats((mRes.documents ?? []).slice(0, 5));
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -95,6 +118,7 @@ export default function TeacherDashboard() {
         </div>
       </div>
 
+<<<<<<< HEAD
       {/* ── Stat cards ───────────────────────────────────── */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
@@ -102,6 +126,35 @@ export default function TeacherDashboard() {
           { label: "Pending Review", value: pending.length, icon: <Clock className="h-5 w-5 text-white" />, bg: "gradient-orange", iconBg: "bg-white/20", url: "/lms/study", sub: "Student submissions" },
           { label: "My Students", value: "—", icon: <Users className="h-5 w-5 text-black" />, bg: "bg-gradient-to-br from-[#3ecf8e] to-[#059669]", iconBg: "bg-black/15", url: "/users/students", sub: "View roster" },
           { label: "Exams Created", value: "—", icon: <Zap className="h-5 w-5 text-white" />, bg: "bg-gradient-to-br from-purple-700 to-purple-500", iconBg: "bg-white/20", url: "/lms/exams", sub: "Active exams" },
+=======
+      {/* ── Coloured stat cards ───────────────────────────── */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          {
+            label: "My Materials", value: myMats.length,
+            icon: <FileText className="h-5 w-5 text-white" />,
+            bg: "gradient-navy", iconBg: "bg-white/20", url: "/lms/study",
+            sub: "Uploaded notes",
+          },
+          {
+            label: "Pending Review", value: pending.length,
+            icon: <Clock className="h-5 w-5 text-white" />,
+            bg: "gradient-orange", iconBg: "bg-white/20", url: "/lms/study",
+            sub: "Student submissions",
+          },
+          {
+            label: "My Students", value: "—",
+            icon: <Users className="h-5 w-5 text-black" />,
+            bg: "bg-gradient-to-br from-[#3ecf8e] to-[#059669]", iconBg: "bg-black/15", url: "/users/students",
+            sub: "View roster",
+          },
+          {
+            label: "Exams Created", value: "—",
+            icon: <Zap className="h-5 w-5 text-white" />,
+            bg: "bg-gradient-to-br from-purple-700 to-purple-500", iconBg: "bg-white/20", url: "/lms/exams",
+            sub: "Active exams",
+          },
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
         ].map(s => (
           <div key={s.label} onClick={() => navigate(s.url)}
             className={`group cursor-pointer rounded-2xl p-5 text-white relative overflow-hidden card-hover ${s.bg}`}>
@@ -218,6 +271,7 @@ export default function TeacherDashboard() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-semibold truncate group-hover:text-[#3ecf8e] transition-colors">{doc.title}</p>
+<<<<<<< HEAD
                         {doc.className && (
                           <button
                             onClick={e => { e.stopPropagation(); navigate(`/classes/${doc.className}`); }}
@@ -226,6 +280,9 @@ export default function TeacherDashboard() {
                             {doc.className}
                           </button>
                         )}
+=======
+                        {doc.className && <span className="text-xs bg-navy/10 text-navy dark:bg-white/10 dark:text-white/70 font-medium px-1.5 py-0.5 rounded-full mt-0.5 inline-block">{doc.className}</span>}
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
                       </div>
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                         doc.approvalStatus === "approved" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" :
@@ -249,10 +306,17 @@ export default function TeacherDashboard() {
             <h3 className="text-base font-bold text-foreground mb-4">Quick Actions</h3>
             <div className="grid grid-cols-2 gap-2">
               {[
+<<<<<<< HEAD
                 { label: "Upload",    icon: <Upload className="h-4 w-4" />,   url: "/lms/study?upload=true", bg: "bg-gradient-to-br from-[#3ecf8e] to-[#059669] text-black" },
                 { label: "New Exam",  icon: <Zap className="h-4 w-4" />,     url: "/lms/exams",             bg: "gradient-orange text-white"   },
                 { label: "Students",  icon: <Users className="h-4 w-4" />,   url: "/users/students",        bg: "gradient-navy text-white"     },
                 { label: "Timetable", icon: <BookOpen className="h-4 w-4" />,url: "/timetable",             bg: "bg-gradient-to-br from-blue-600 to-blue-400 text-white" },
+=======
+                { label: "Upload", icon: <Upload className="h-4 w-4" />,       url: "/lms/study?upload=true", bg: "bg-gradient-to-br from-[#3ecf8e] to-[#059669] text-black" },
+                { label: "New Exam",icon: <Zap className="h-4 w-4" />,         url: "/lms/exams",             bg: "gradient-orange text-white"   },
+                { label: "Students",icon: <Users className="h-4 w-4" />,       url: "/users/students",        bg: "gradient-navy text-white"     },
+                { label: "Timetable",icon:<BookOpen className="h-4 w-4" />,    url: "/timetable",             bg: "bg-gradient-to-br from-blue-600 to-blue-400 text-white" },
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
               ].map(a => (
                 <button key={a.label} onClick={() => navigate(a.url)}
                   className={`flex flex-col items-center gap-2 p-4 rounded-xl shadow-sm transition-all hover:scale-105 active:scale-95 ${a.bg}`}>
@@ -263,7 +327,11 @@ export default function TeacherDashboard() {
             </div>
           </div>
 
+<<<<<<< HEAD
           {/* Classes — click navigates to /classes/SS1 showing filtered materials */}
+=======
+          {/* Classes */}
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
           <div className="bg-card border border-border rounded-2xl p-5 shadow-sm">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-7 h-7 rounded-lg gradient-navy flex items-center justify-center">
@@ -279,11 +347,14 @@ export default function TeacherDashboard() {
                     <span className={`text-xs font-extrabold ${c.textBlack ? "text-black" : "text-white"}`}>{c.name}</span>
                   </div>
                   <span className="text-sm font-semibold flex-1 text-foreground">View {c.name} materials</span>
+<<<<<<< HEAD
                   {classCounts[c.name] != null && (
                     <span className="text-xs bg-muted text-muted-foreground font-bold px-2 py-0.5 rounded-full">
                       {classCounts[c.name]}
                     </span>
                   )}
+=======
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
                   <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-0.5 group-hover:text-[#3ecf8e] transition-all" />
                 </button>
               ))}

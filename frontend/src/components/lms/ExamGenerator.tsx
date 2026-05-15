@@ -64,8 +64,15 @@ const ExamGenerator = ({ open, onOpenChange, onSuccess }: Props) => {
     if (open) {
       Promise.all([api.get("/subjects"), api.get("/classes")]).then(
         ([subRes, clsRes]) => {
+<<<<<<< HEAD
           setSubjects((subRes.data as { subjects: subject[] }).subjects);
           setClasses((clsRes.data as { classes: Class[] }).classes);
+=======
+          const subData = subRes.data as { subjects: subject[] };
+          const clsData = clsRes.data as { classes: Class[] };
+          setSubjects(subData.subjects);
+          setClasses(clsData.classes);
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
         }
       );
     }

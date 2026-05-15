@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "chukwudilms-frontend",
   "private": true,
   "version": "1.0.0",
@@ -6,6 +7,15 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+=======
+  "name": "edunexus-frontend",
+  "private": true,
+  "version": "1.0.0",
+   "type" :"module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
     "lint": "eslint .",
     "preview": "vite preview"
   },

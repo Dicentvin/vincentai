@@ -32,11 +32,19 @@ const AcademicYear = () => {
       if (debouncedSearch) params.append("search", debouncedSearch);
 
       const { data } = await api.get(`/academic-years?${params.toString()}`);
+<<<<<<< HEAD
       const result = data as { years?: academicYear[]; pagination?: { pages: number } };
 
       if (result.years) {
         setYears(result.years);
         setTotalPages(result.pagination?.pages ?? 1);
+=======
+
+      const d = data as any;
+      if (d.years) {
+        setYears(d.years);
+        setTotalPages(d.pagination.pages);
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
       } else {
         setYears([]);
       }

@@ -79,12 +79,16 @@ export const mockApi = {
       };
     }
     if (url.includes("/exams") && !url.match(/\/exams\/[^/]+/)) {
+<<<<<<< HEAD
       return {
         data: {
           exams: mockExams,
           pagination: { total: mockExams.length, page: 1, pages: 1, limit: 10 },
         },
       };
+=======
+      return { data: mockExams };
+>>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
     }
     if (url.match(/\/exams\/[^/]+\/result/)) {
       return { data: null };
