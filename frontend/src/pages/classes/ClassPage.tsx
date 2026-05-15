@@ -139,11 +139,7 @@ export default function ClassPage() {
 
   useEffect(() => {
     setLoading(true);
-<<<<<<< HEAD
-    lmsDocs.listShared({ className: cls })
-=======
     lmsDocs.listShared({ class: cls })
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
       .then(r => setDocs(r.documents ?? []))
       .catch(() => setDocs([]))
       .finally(() => setLoading(false));

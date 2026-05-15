@@ -22,11 +22,7 @@ const Timetable = () => {
     if (!classId) return;
     try {
       const { data } = await api.get(`/timetables/${classId}`);
-<<<<<<< HEAD
-      setScheduleData((data as any)?.schedule ?? []);
-=======
       setScheduleData((data as any).schedule || []);
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
     } catch (error: any) {
       if (error.response && error.response.status === 404) {
         setScheduleData([]);
@@ -59,11 +55,7 @@ const Timetable = () => {
         academicYearId: yearId,
         settings,
       });
-<<<<<<< HEAD
-      toast.success((data as any)?.message || "AI Generation Started");
-=======
       toast.success((data as any).message || "AI Generation Started");
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
 
       setTimeout(() => {
         fetchTimetable(classId);

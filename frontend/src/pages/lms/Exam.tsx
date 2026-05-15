@@ -42,11 +42,7 @@ const Exam = () => {
     setLoading(true);
     try {
       const res = await api.get(`/exams/${id}`);
-<<<<<<< HEAD
-      setExam(res.data as exam);
-=======
       setExam((res.data as any).exam ?? res.data);
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
     } catch {
       toast.error("Failed to load exam");
       navigate("/lms/exams");
@@ -57,11 +53,7 @@ const Exam = () => {
     if (isStudent) {
       try {
         const res = await api.get(`/exams/${id}/result`);
-<<<<<<< HEAD
-        setSubmission(res.data as Submission);
-=======
         setSubmission((res.data as any) ?? null);
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
       } catch {
         setSubmission(null);
       }
@@ -128,12 +120,7 @@ const Exam = () => {
         answer: ans,
       }));
       const { data } = await api.post(`/exams/${id}/submit`, { answers: payload });
-<<<<<<< HEAD
-      const submitResult = data as { success: boolean; score: number };
-      toast.success(`Exam submitted! Score: ${submitResult.score}`);
-=======
       toast.success(`Exam submitted! Score: ${(data as any).score ?? 0}`);
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
       navigate("/lms/exams");
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Submission failed");
@@ -145,12 +132,7 @@ const Exam = () => {
   const handleToggleStatus = async () => {
     try {
       const { data } = await api.patch(`/exams/${id}/status`);
-<<<<<<< HEAD
-      const patchResult = data as { success: boolean; message: string };
-      toast.success(patchResult.message);
-=======
       toast.success(data.message);
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
       fetchExam();
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Failed to update status");

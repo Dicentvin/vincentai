@@ -129,11 +129,7 @@ const UniversalUserForm = ({ type, initialData, onSuccess, role }: Props) => {
         email:      initialData.email || "",
         role:       initialData.role || "student",
         password:   "",
-<<<<<<< HEAD
-        classId:    existingClassId ?? "",
-=======
         classId:    existingClassId || "",
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
         subjectIds: initialData.teacherSubjects?.map((s) => s._id) || [],
       });
     }
@@ -147,11 +143,7 @@ const UniversalUserForm = ({ type, initialData, onSuccess, role }: Props) => {
         let backendUser: any;
 
         try {
-<<<<<<< HEAD
-          const result = await lmsAuth.login(data.email, data.password!);
-=======
           const result = await lmsAuth.login(data.email ?? "", data.password ?? "");
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
           backendToken = result.token;
           backendUser  = result.user;
         } catch (err: any) {

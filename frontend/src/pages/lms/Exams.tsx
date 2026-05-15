@@ -29,11 +29,7 @@ const Exams = () => {
     try {
       setLoading(true);
       const { data } = await api.get("/exams");
-<<<<<<< HEAD
-      setExams((data as { exams: exam[] }).exams ?? []);
-=======
       setExams(Array.isArray(data) ? data : (data as any).exams ?? []);
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
     } catch (error) {
       toast.error("Failed to load exams");
       console.log(error);

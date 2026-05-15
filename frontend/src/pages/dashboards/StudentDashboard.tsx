@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-// src/pages/dashboards/StudentDashboard.tsx
-// Class cards navigate to /classes/SS1 etc which shows filtered materials
-=======
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "@/hooks/AuthProvider";
@@ -49,28 +44,13 @@ export default function StudentDashboard() {
   const navigate  = useNavigate();
   const [myDocs,     setMyDocs]     = useState<LmsDocument[]>([]);
   const [sharedDocs, setSharedDocs] = useState<LmsDocument[]>([]);
-<<<<<<< HEAD
-  const [classCounts, setClassCounts] = useState<Record<string, number>>({});
-=======
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
   const [loading,    setLoading]    = useState(true);
 
   useEffect(() => {
     Promise.all([lmsDocs.list(), lmsDocs.listShared()])
       .then(([my, shared]) => {
         setMyDocs(my.documents ?? []);
-<<<<<<< HEAD
-        const shared_ = shared.documents ?? [];
-        setSharedDocs(shared_);
-        // Count materials per class
-        const counts: Record<string, number> = {};
-        shared_.forEach(d => {
-          if (d.className) counts[d.className] = (counts[d.className] || 0) + 1;
-        });
-        setClassCounts(counts);
-=======
         setSharedDocs(shared.documents ?? []);
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -170,11 +150,7 @@ export default function StudentDashboard() {
         {/* Left col */}
         <div className="lg:col-span-4 space-y-6">
 
-<<<<<<< HEAD
-          {/* Quick actions */}
-=======
           {/* Quick actions — coloured grid */}
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
           <div className="bg-card border border-border rounded-2xl p-5 shadow-sm">
             <h3 className="text-base font-bold text-foreground mb-4">Quick Actions</h3>
             <div className="grid grid-cols-3 gap-3">
@@ -254,11 +230,7 @@ export default function StudentDashboard() {
         {/* Right col */}
         <div className="lg:col-span-3 space-y-4">
 
-<<<<<<< HEAD
-          {/* Browse by Class — each click goes to /classes/SS1 which filters materials */}
-=======
           {/* Browse by Class */}
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
           <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-sm">
             <div className="h-1 bg-gradient-to-r from-[#3ecf8e] via-purple-500 to-orange-500" />
             <div className="p-5">
@@ -271,14 +243,6 @@ export default function StudentDashboard() {
                       <span className={`text-xs font-extrabold ${c.text}`}>{c.name}</span>
                     </div>
                     <span className="text-sm font-semibold flex-1 text-foreground">{c.name} Materials</span>
-<<<<<<< HEAD
-                    {classCounts[c.name] != null && (
-                      <span className="text-xs bg-muted text-muted-foreground font-bold px-2 py-0.5 rounded-full">
-                        {classCounts[c.name]}
-                      </span>
-                    )}
-=======
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
                     <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-0.5 group-hover:text-[#3ecf8e] transition-all" />
                   </button>
                 ))}

@@ -48,13 +48,8 @@ const ClassForm = ({ open, onOpenChange, initialData, onSuccess }: Props) => {
             api.get("/users?role=teacher"),
             api.get("/academic-years"),
           ]);
-<<<<<<< HEAD
-          setTeachers((teachersRes.data as { users: Option[] }).users);
-          setYears((yearsRes.data as { years: Option[] }).years);
-=======
           setTeachers((teachersRes.data as any)?.users ?? []);
           setYears((yearsRes.data as any)?.years ?? []);
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
         } catch (error) {
           toast.error("Failed to load options");
         } finally {
@@ -70,11 +65,7 @@ const ClassForm = ({ open, onOpenChange, initialData, onSuccess }: Props) => {
       try {
         setLoadingSubjects(true);
         const { data } = await api.get("/subjects");
-<<<<<<< HEAD
-        setSubjects((data as { subjects: Option[] }).subjects);
-=======
         setSubjects((data as any)?.subjects ?? []);
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
       } catch (error) {
         toast.error("Failed to load subjects");
       } finally {

@@ -21,11 +21,7 @@ if (USE_MOCK) {
   // Replace with real axios instance when backend is ready
   const axios = await import("axios");
   api = axios.default.create({
-<<<<<<< HEAD
-    baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
-=======
     baseURL: (import.meta as any).env?.VITE_API_URL || "http://localhost:5000/api",
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
     withCredentials: true,
   }) as any;
 }
