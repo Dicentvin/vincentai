@@ -1,14 +1,5 @@
-<<<<<<< HEAD
 // src/services/lmsApi.ts
-// ─── Points to Vercel serverless API ─────────────────────
-// Set VITE_LMS_API_URL="" (empty) in .env — Vercel serves both
-// frontend and API from the same domain, so relative URLs work.
-// For local dev, set VITE_LMS_API_URL=http://localhost:3000
-// ─────────────────────────────────────────────────────────
 const BASE = import.meta.env.VITE_LMS_API_URL ?? "";
-=======
-const BASE = (import.meta as any).env?.VITE_LMS_API_URL ?? "";
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
 
 function getToken(): string { return localStorage.getItem("lms_token") ?? ""; }
 function authHeaders(): HeadersInit {
@@ -19,15 +10,9 @@ function jsonHeaders(): HeadersInit {
   return { ...authHeaders(), "Content-Type": "application/json" };
 }
 async function handle<T>(res: Response): Promise<T> {
-<<<<<<< HEAD
   const j = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error((j as any).message ?? res.statusText ?? "Request failed");
   return j as T;
-=======
-  const json = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error((json as any).message ?? res.statusText ?? "Request failed");
-  return json as T;
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -89,10 +74,6 @@ export const lmsUsers = {
       .then(handle<{ success: boolean; count: number; users: LmsUser[] }>);
   },
 
-<<<<<<< HEAD
-=======
-  // Fetch students, teachers AND parents in one call
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
   listAll: () =>
     fetch(`${BASE}/api/users`, { headers: authHeaders() })
       .then(handle<{ success: boolean; count: number; users: LmsUser[] }>),
@@ -116,63 +97,29 @@ export const lmsDocs = {
       method: "POST", headers: authHeaders(), body: formData,
     }).then(handle<{ success: boolean; document: LmsDocument }>),
 
-  // Own documents — accepts optional class/term/subject filters
   list: (params?: { class?: string; term?: string; subject?: string }) => {
     const entries = Object.entries(params ?? {}).filter(([, v]) => v);
-<<<<<<< HEAD
     const q = entries.length ? "?" + new URLSearchParams(Object.fromEntries(entries) as Record<string, string>).toString() : "";
-=======
-    const q = entries.length ? "?" + new URLSearchParams(Object.fromEntries(entries) as Record<string,string>).toString() : "";
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
     return fetch(`${BASE}/api/documents${q}`, { headers: authHeaders() })
       .then(handle<{ success: boolean; count: number; documents: LmsDocument[] }>);
   },
 
-<<<<<<< HEAD
-  // Shared public approved materials — supports className filter (used by ClassPage)
   listShared: (params?: { class?: string; className?: string; term?: string; subject?: string }) => {
     const p: Record<string, string> = { shared: "true" };
-    // Accept either 'class' or 'className' — backend reads both
     const cls = params?.class || params?.className;
-    if (cls)            p.class   = cls;
-    if (params?.term)   p.term    = params.term;
-    if (params?.subject)p.subject = params.subject;
+    if (cls)             p.class   = cls;
+    if (params?.term)    p.term    = params.term;
+    if (params?.subject) p.subject = params.subject;
     return fetch(`${BASE}/api/documents?${new URLSearchParams(p).toString()}`, { headers: authHeaders() })
       .then(handle<{ success: boolean; count: number; documents: LmsDocument[] }>);
   },
 
-  // Teacher-uploaded materials only
   listTeacherMaterials: (params?: { class?: string; term?: string; subject?: string }) => {
     const p: Record<string, string> = { shared: "true", uploaderRole: "teacher" };
     if (params?.class)   p.class   = params.class;
     if (params?.term)    p.term    = params.term;
     if (params?.subject) p.subject = params.subject;
     return fetch(`${BASE}/api/documents?${new URLSearchParams(p).toString()}`, { headers: authHeaders() })
-=======
-  // Shared public approved materials (teacher/admin uploads visible to all)
-  // NOTE: backend reads query param as "class" not "className"
-  listShared: (params?: { class?: string; term?: string; subject?: string }) => {
-    const q = new URLSearchParams({
-      shared: "true",
-      ...(params?.class   ? { class:   params.class   } : {}),
-      ...(params?.term    ? { term:    params.term    } : {}),
-      ...(params?.subject ? { subject: params.subject } : {}),
-    }).toString();
-    return fetch(`${BASE}/api/documents?${q}`, { headers: authHeaders() })
-      .then(handle<{ success: boolean; count: number; documents: LmsDocument[] }>);
-  },
-
-  // Teacher-uploaded materials only (for students' "Teacher Materials" table)
-  listTeacherMaterials: (params?: { class?: string; term?: string; subject?: string }) => {
-    const q = new URLSearchParams({
-      shared:       "true",
-      uploaderRole: "teacher",
-      ...(params?.class   ? { class:   params.class   } : {}),
-      ...(params?.term    ? { term:    params.term    } : {}),
-      ...(params?.subject ? { subject: params.subject } : {}),
-    }).toString();
-    return fetch(`${BASE}/api/documents?${q}`, { headers: authHeaders() })
->>>>>>> 2147f84113ab7e89f5ed8116ca3460769df5de02
       .then(handle<{ success: boolean; count: number; documents: LmsDocument[] }>);
   },
 
